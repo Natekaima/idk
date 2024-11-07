@@ -1,0 +1,54 @@
+ {
+
+    // Method to apply a "style" to each word
+    public static String stylizeWord(String word) {
+        Random random = new Random();
+        StringBuilder styledWord = new StringBuilder();
+
+        // For each character, randomly choose to capitalize or not
+        for (char c : word.toCharArray()) {
+            if (random.nextBoolean()) {
+                styledWord.append(Character.toUpperCase(c));
+            } else {
+                styledWord.append(Character.toLowerCase(c));
+            }
+        }
+
+        // Randomly decide to reverse the word
+        if (random.nextBoolean()) {
+            styledWord.reverse();
+        }
+
+        // Randomly add some expressive characters
+        int flair = random.nextInt(3);
+        switch (flair) {
+            case 0 -> styledWord.append("~"); // add a tilde
+            case 1 -> styledWord.insert(0, "*"); // add a star
+            case 2 -> styledWord.append("!"); // add an exclamation
+        }
+
+        return styledWord.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("🎨 Welcome to Word Artist! 🎨");
+        System.out.print("Enter a phrase to stylize: ");
+        String input = scanner.nextLine();
+
+        // Split the input into words
+        String[] words = input.split(" ");
+        StringBuilder styledPhrase = new StringBuilder();
+
+        System.out.println("\n✨ Your artistic sentence: ✨");
+
+        // Stylize each word individually
+        for (String word : words) {
+            styledPhrase.append(stylizeWord(word)).append(" ");
+        }
+
+        // Display the final stylized phrase
+        System.out.println(styledPhrase.toString().trim());
+    }
+}
